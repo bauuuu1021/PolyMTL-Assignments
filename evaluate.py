@@ -8,8 +8,10 @@ def sendRequest(cluster, iter):
     for i in range(iter):
         print('%3d' % i + ': ', end='')
         r = requests.get(url + cluster)
-        print(r.json(), end='\tstatus ')
-        print(r.status_code)
+        try:
+            print(str(r.json()) + '\tstatus ' + str(r.status_code))
+        except:
+            print('\033[0;31mFailed to responce\033[0m\t\t\tstatus ' + str(r.status_code))
 
 def scenario1(cluster):
     print('\033[1;33m' + '-'*15 + cluster + ' starts scenario1' + '-'*15 + '\033[0m')
