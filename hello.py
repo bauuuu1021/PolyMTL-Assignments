@@ -6,5 +6,5 @@ app = Flask(__name__)
 def my_app(text):
     if text.startswith('cluster'):
         return {
-            "Public IP": get('https://api.ipify.org').content.decode('utf8'),
+            "Instance ID": get('http://169.254.169.254/latest/meta-data/instance-id').content.decode('utf8'),
         }
