@@ -11,7 +11,7 @@ def sendRequest(cluster, iter):
         try:
             print(str(r.json()) + '\tstatus ' + str(r.status_code))
         except:
-            print('\033[0;31mFailed to responce\033[0m\t\t\tstatus ' + str(r.status_code))
+            print('\033[0;31mFailed to responce\033[0m\t\t\t\tstatus ' + str(r.status_code))
 
 def scenario1(cluster):
     print('\033[1;33m' + '-'*15 + cluster + ' starts scenario1' + '-'*15 + '\033[0m')
