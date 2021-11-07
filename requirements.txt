@@ -1,4 +1,5 @@
-boto3==1.9.149
+boto3==1.19.12
 paramiko==2.7.1
-requests==2.21.0
+requests==2.26.0
 matplotlib==3.0.3
+awscli==1.21.12
