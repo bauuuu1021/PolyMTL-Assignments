@@ -195,7 +195,7 @@ def test(load_balancer_url):
         print('\033[1;33m' + '-' * 15 + cluster +
               ' starts scenario1' + '-' * 15 + '\033[0m')
         start = time.time()
-        sendRequest(cluster, 50)
+        sendRequest(cluster, 200)
         duration = time.time() - start
 
         print('\033[1;33m' + '-' * 8, end='')
@@ -207,7 +207,7 @@ def test(load_balancer_url):
         print('\033[1;36m' + '-' * 15 + cluster +
               ' starts scenario2' + '-' * 15 + '\033[0m')
         start = time.time()
-        sendRequest(cluster, 150)
+        sendRequest(cluster, 500)
         duration = time.time() - start
 
         print('\033[1;36m' + '-' * 8, end='')
@@ -424,50 +424,50 @@ x_axis = []
 for data in sorted(load_balancer_request_counts_sum['Datapoints'], key=lambda d: d['Timestamp']):
     x_axis.append(data['Timestamp'])
     y_axis.append(data['Sum'])
-plt.figure(figsize=(15, 10))
+fig = plt.figure(figsize=(15, 10))
 plt.plot(x_axis, y_axis, label='Load Balancer Request Counts - Sum')
 plt.legend()
-plt.show()
+fig.savefig('EB_Request_Count_demo.png', dpi=fig.dpi)
 
 y_axis = []
 x_axis = []
 for data in sorted(active_connection_counts_sum['Datapoints'], key=lambda d: d['Timestamp']):
     x_axis.append(data['Timestamp'])
     y_axis.append(data['Sum'])
-plt.figure(figsize=(15, 10))
+fig = plt.figure(figsize=(15, 10))
 plt.plot(x_axis, y_axis, label='Active Connection Counts - Sum')
 plt.legend()
-plt.show()
+fig.savefig('Active_Conn_Count_demo.png', dpi=fig.dpi)
 
 y_axis = []
 x_axis = []
 for data in sorted(new_connection_counts_sum['Datapoints'], key=lambda d: d['Timestamp']):
     x_axis.append(data['Timestamp'])
     y_axis.append(data['Sum'])
-plt.figure(figsize=(15, 10))
+fig = plt.figure(figsize=(15, 10))
 plt.plot(x_axis, y_axis, label='New Connection Counts - Sum')
 plt.legend()
-plt.show()
+fig.savefig('New_Conn_Count_demo.png', dpi=fig.dpi)
 
 y_axis = []
 x_axis = []
 for data in sorted(rule_evaluations_counts_sum['Datapoints'], key=lambda d: d['Timestamp']):
     x_axis.append(data['Timestamp'])
     y_axis.append(data['Sum'])
-plt.figure(figsize=(15, 10))
+fig = plt.figure(figsize=(15, 10))
 plt.plot(x_axis, y_axis, label='Rule Evaluation Counts - Sum')
 plt.legend()
-plt.show()
+fig.savefig('Rule_Eva_Count_demo.png', dpi=fig.dpi)
 
 y_axis = []
 x_axis = []
 for data in sorted(target_response_time_sum['Datapoints'], key=lambda d: d['Timestamp']):
     x_axis.append(data['Timestamp'])
     y_axis.append(data['Sum'])
-plt.figure(figsize=(15, 10))
+fig = plt.figure(figsize=(15, 10))
 plt.plot(x_axis, y_axis, label='Load Balancer Target Response Time - Sum')
 plt.legend()
-plt.show()
+fig.savefig('LB_Resp_T_demo.png', dpi=fig.dpi)
 
 cluster1_y_axis = []
 cluster1_x_axis = []
@@ -479,11 +479,11 @@ for data in sorted(cluster1_target_response_time_avg['Datapoints'], key=lambda d
 for data in sorted(cluster2_target_response_time_avg['Datapoints'], key=lambda d: d['Timestamp']):
     cluster2_x_axis.append(data['Timestamp'])
     cluster2_y_axis.append(data['Average'])
-plt.figure(figsize=(15, 10))
+fig = plt.figure(figsize=(15, 10))
 plt.plot(cluster1_x_axis, cluster1_y_axis, label='Cluster 1 Target Response Time - Average')
 plt.plot(cluster2_x_axis, cluster2_y_axis, label='Cluster 2 Target Response Time - Average')
 plt.legend()
-plt.show()
+fig.savefig('Cluster_Avg_T_demo.png', dpi=fig.dpi)
 
 cluster1_y_axis = []
 cluster1_x_axis = []
@@ -495,11 +495,11 @@ for data in sorted(cluster1_target_request_time_per_counter_sum['Datapoints'], k
 for data in sorted(cluster2_target_request_time_per_counter_sum['Datapoints'], key=lambda d: d['Timestamp']):
     cluster2_x_axis.append(data['Timestamp'])
     cluster2_y_axis.append(data['Sum'])
-plt.figure(figsize=(15, 10))
+fig = plt.figure(figsize=(15, 10))
 plt.plot(cluster1_x_axis, cluster1_y_axis, label='Cluster 1 Target Request Time Per Counter - Sum')
-plt.plot(cluster2_x_axis, cluster2_y_axis, label='Cluster 1 Target Request Time Per Counter - Sum')
+plt.plot(cluster2_x_axis, cluster2_y_axis, label='Cluster 2 Target Request Time Per Counter - Sum')
 plt.legend()
-plt.show()
+fig.savefig('Cluster_Avg_Sum_demo.png', dpi=fig.dpi)
 
 for instance in cluster1_instances['Instances']:
     terminate_instance(instance)
